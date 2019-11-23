@@ -7,6 +7,24 @@ We are not obligated to provide updates or fixes to this guide. We are not respo
 
 It is the end user's sole responsibility to legally acquire any and all materials for use on a particular emulator. Such as the MAME ROMs that have been approved for free distribution by the MAME organization, please visit https://www.mamedev.org/roms/ . 
 
+## Mac Users
+
+Run `git submodule update --init` to pull `squashfs-tools`.
+
+```shell
+pushd squashfs-tools/squashfs-tools
+make
+popd
+export PATH=$PATH:$PWD/squashfs-tools/squashfs-tools
+```
+
+Using your favorite package manager (e.g. MacPorts), install the following:
+
+* truncate
+* e2fsprogs
+
+Then run the command as described below
+
 ## Getting Started
 The following sections will prepare your home arcade, as well as the files to be packed into an add-on image.
 
