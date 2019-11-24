@@ -1,4 +1,4 @@
-#!/bin/bash -eEuxo pipefail
+#!/bin/bash -eEuo pipefail
 
 #cart_file=./byog_cartridge_shfs.img
 cart_file="$2"
@@ -45,17 +45,12 @@ echo "*** Size of $cart_tmp_file: $SQIMGFILESIZE Bytes (after applying 4k alignm
 
 my_md5string_hex_file=./my_md5string_hex.bin
 
-# TODO
-#  * oflag append is not portable
-#  * stat is not portable
-#  * md5sum is not portable
-
 # header padding 64 bytes
 EXT4FILE_OFFSET=$((SQIMGFILESIZE+64));
 echo "*** Offset of Ext4 partition for file saving would be: $EXT4FILE_OFFSET"
 
 # macOS and BSDs use md5(1)
-if ! which md5sum && which md5; then
+if ! which md5sum > /dev/null && which md5 > /dev/null; then
   md5sum() {
     md5 "$@"
   }

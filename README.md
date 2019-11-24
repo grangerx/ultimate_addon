@@ -98,12 +98,32 @@ EOF
 rm /tmp/gameinfo.ini
 ```
 
+### Using Builtin Emulators
+
+It's not necessary to pack an emulator library into the Add-On package if one 
+of the existing emulators works with the rom being used. Instead of including
+an `emu` file and library, these emulators are already on the system and can be
+referenced with an absolute path:
+
+* Genesis: `/emulator/genesis_plus_gx_libretro.so`
+* MAME:
+  * 2003: `/emulator/mame2003_plus_libretro.so`
+  * 2010: `/emulator/mame2010_libretro.so`
+* NES: `/emulator/quicknes_libretro.so`
+* SNES: `/emulator/snes_mtfaust-arm64-cortex-a53.so`
+* Atari 2600: `/emulator/stella_libretro.so`
+
+For example, to play the included **Warspeed** game with the builtin emulator
+you can change the line which runs `retrplayer` to:
+
+    /emulator/retroplayer /emulator/genesis_plus_gx_libretro.so roms/Warpspeed.bin
+
 ## Building the Add-on Image
 
 After preparing the files into the structure above, run the following Linux shell script to make a .UCE image file
 
 ```shell
-./build_sq_cartridge_pack.sh ./AddOn_Warpspeed ./AddOn_Warpspeed.UCE
+./build_sq_cartridge_pack.sh ./AddOn_Warpspeed ./AddOn_Warpspeed.uce
 ```
 
 The stack inside the Add-on image looks like this:
