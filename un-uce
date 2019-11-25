@@ -1,0 +1,19 @@
+#!/bin/bash -eEuxo pipefail
+
+readonly uce_file="$1"
+readonly output_dir="${2:-"${uce_file%.[uU][cC][eE]}"}"
+
+echo "file: $uce_file"
+echo "output dir: $output_dir"
+
+if [[ ! -f $uce_file ]]; then
+    echo "file does not exist: $uce_file" >&2
+    exit 1
+fi
+
+if [[ -f "$output_dir" ]]; then
+    echo "output directory exists and is a file: $output_dir" >&2
+    exit 1
+fi
+
+unsquashfs -d "$output_dir" "$uce_file"
